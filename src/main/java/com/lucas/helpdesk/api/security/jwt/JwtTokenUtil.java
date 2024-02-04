@@ -46,5 +46,15 @@ public class JwtTokenUtil implements Serializable {
 	   
 	   return expiration;
 	}
+	
+	public Claims getClaimsFromToken(String token) {
+		Claims claims;
+		try {
+			claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+		}catch (Exception e) {
+			claims = null;
+		}
+		return claims;
+	}
 
 }
