@@ -1,8 +1,12 @@
 package com.lucas.helpdesk.api.security.jwt;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 
 public class JwtTokenUtil implements Serializable {
 
@@ -17,4 +21,30 @@ public class JwtTokenUtil implements Serializable {
 	
 	@Value("${jwt.expiration}")
 	private Long expiration;
+	
+	public String getUserNameFromToken(String token) {
+	   String username;
+	   try {
+		   final Claims claims = null;
+		   username = claims.getSubject();	   
+	   }catch (Exception e) {
+		   username = null;
+	   }
+	   
+	   return username;
+	}
+	
+
+	public Date getExpirationDateFromToken(String token) {
+	   Date expiration;
+	   try {
+		   final Claims claims = null;
+		   expiration = claims.getExpiration();	   
+	   }catch (Exception e) {
+		   expiration = null;
+	   }
+	   
+	   return expiration;
+	}
+
 }
